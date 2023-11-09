@@ -1,25 +1,100 @@
 class ObjectRegistry:
-    pass
+    def __init__(self):
+        self.object_list = []
+
+    def add_object(self, obj):
+        self.object_list.append(obj)
+
+    def view_list(self):
+        for obj in self.object_list:
+            obj.info()
+            print("")
 
 
 class BaseObject:
-    pass
+    def __init__(self, name, date):
+        self._name = name
+        self._date = date
+
+    @property
+    def info_name(self):
+        return self._name
+
+    @property
+    def info_date(self):
+        return self._date
+
+    def info(self):
+        print(f"Название:", self.info_name)
+        print(f"Дата:", self.info_date)
 
 
 class Test(BaseObject):
-    pass
+    def __init__(self, name, date, questions):
+        super().__init__(name, date)
+        self._questions = questions
+
+    @property
+    def info_questions(self):
+        return self._questions
+
+    def info(self):
+        super().info()
+        print("Тип: Тест")
+        print("Вопросы:")
+        for question in self.info_questions:
+            print(f"- {question}")
 
 
 class Exam(BaseObject):
-   pass
+    def __init__(self, name, date, subject):
+        super().__init__(name, date)
+        self._subject = subject
+
+    @property
+    def subject_info(self):
+        return self._subject
+
+    def info(self):
+        super().info()
+        print(f"Тип: Экзамен")
+        print(f"Предмет:", self.subject_info)
 
 
 class GraduationExam(Exam):
-    pass
+    def __init__(self, name, date, subject, required_score):
+        super().__init__(name, date, subject)
+        self._required_score = required_score
+
+    @property
+    def req_score_info(self):
+        return self._required_score
+
+    def info(self):
+        super().info()
+        print(f"Подтип: Выпускной экзамен")
+        print(f"Проходной балл:", self.req_score_info)
 
 
 class TestTrial(BaseObject):
-    pass
+    def __init__(self, name, date, subject, difficulty):
+        super().__init__(name, date)
+        self._subject = subject
+        self._difficulty = difficulty
+
+    @property
+    def subject_info(self):
+        return self._subject
+
+    @property
+    def difficulty_info(self):
+        return self._difficulty
+
+    def info(self):
+        super().info()
+        print(f"Тип: Испытание")
+        print(f"Предмет:", self.subject_info)
+        print(f"Сложность:", self.difficulty_info)
 
 
 def int_input(inpt):
