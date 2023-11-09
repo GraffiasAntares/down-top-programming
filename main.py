@@ -170,7 +170,33 @@ def create_test_trial(registry):
 
 
 def main():
-    pass
+    registry = ObjectRegistry()
+    while True:
+        print("\n"
+              "[1] Создать тест\n"
+              "[2] Создать экзамен\n"
+              "[3] Создать выпускной экзамен\n"
+              "[4] Создать испытание\n"
+              "[5] Вывести расписание\n"
+              "[6] Выйти из программы\n")
+        user_input = int_input(input("..."))
+
+        match user_input:
+            case 1:
+                create_test(registry)
+            case 2:
+                create_exam(registry)
+            case 3:
+                create_graduation_exam(registry)
+            case 4:
+                create_test_trial(registry)
+            case 5:
+                registry.view_list()
+                input("Нажмите Enter, чтобы продолжить...")
+            case 6:
+                exit()
+            case _:
+                print("\nОшибка ввода\n")
 
 
 if __name__ == '__main__':
